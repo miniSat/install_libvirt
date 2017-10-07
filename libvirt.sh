@@ -11,8 +11,9 @@ function for_ubuntu {
 #function installation for fedora
 function for_fedora { 
 	echo $1
+	dnf install kvm -y $>> $log_file
+	dnf install qemu-kvm python-virtinst libvirt libvirt-python virt-manager libguestfs-tools -y &>> $log_file
 }
-
 
 
 distro=$(lsb_release -i | cut -f 2)
