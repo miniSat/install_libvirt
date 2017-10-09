@@ -17,24 +17,14 @@ function check {
 		fi	
 }
 
-
-#function installation for ubuntu
-function for_ubuntu {
-	echo $1
-	apt-get install kvm -y &>> $log_file
-	apt-get install qemu-kvm libvirt-bin -y &>> $log_file
-	apt-get install virtinst -y &>> $log_file
- 	apt-get install virt-manager -y &>> $log_file
-}
-
-
-
 #function installation for fedora
 function for_fedora { 
 	#echo $1
-	
+	check qemu-kvm
+	check qemu-img
 	check libvirt
-
+	check virt-install
+	check virt-manager
 } 
 
 
