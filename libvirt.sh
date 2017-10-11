@@ -4,24 +4,21 @@
 log_file=lvinstall.log
 
 function check {
-	package=$1
-	result=$(dnf -q list installed libvirt &>/dev/null && echo "Installed" || echo "Not installed")
-	if [ "$result" == "Installed" ]
-		then
-			#echo "if"
-			echo "$package already installed."
-	elif [ "$result" == "Not installed" ]
-		then
-			echo "$package is installing"
-			dnf install $package -y
-		fi	
+	if  yum list installed "$@" >/dev/null 2>&1 
+	then
+		#echo "if"
+		echo "$@ already installed."
+	else
+		echo "$@ is installing"
+		dnf install $@ -y
+	fi	
 }
 
 #function installation for fedora
 function for_fedora { 
 	#echo $1
-	check qemu-kvm
-	check qemu-img
+	#check qemu-kvm
+	#check qemu-img
 	check libvirt
 	check virt-install
 	check virt-manager
